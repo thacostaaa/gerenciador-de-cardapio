@@ -26,11 +26,13 @@ namespace codigocardapio
         private MySqlConnectionStringBuilder conexaoBanco()
         {
             MySqlConnectionStringBuilder conexaoBD = new MySqlConnectionStringBuilder();
+
             conexaoBD.Server = "localhost";
             conexaoBD.Database = "cardapio";
             conexaoBD.UserID = "root";
             conexaoBD.Password = "";
             conexaoBD.SslMode = 0;
+
             return conexaoBD;
         }
 
@@ -43,6 +45,7 @@ namespace codigocardapio
         {
             MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
             MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
+
             try
             {
                 realizaConexacoBD.Open();
