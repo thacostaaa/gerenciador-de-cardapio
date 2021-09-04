@@ -57,7 +57,7 @@ namespace codigocardapio
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 23);
+            this.label1.Location = new System.Drawing.Point(8, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
@@ -66,7 +66,7 @@ namespace codigocardapio
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 61);
+            this.label2.Location = new System.Drawing.Point(8, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 1;
@@ -75,7 +75,7 @@ namespace codigocardapio
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 92);
+            this.label3.Location = new System.Drawing.Point(8, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 2;
@@ -181,9 +181,9 @@ namespace codigocardapio
             this.colValorComDesconto,
             this.colCategoria,
             this.colRestricoes});
-            this.dgCardapio.Location = new System.Drawing.Point(13, 145);
+            this.dgCardapio.Location = new System.Drawing.Point(8, 150);
             this.dgCardapio.Name = "dgCardapio";
-            this.dgCardapio.Size = new System.Drawing.Size(775, 293);
+            this.dgCardapio.Size = new System.Drawing.Size(784, 293);
             this.dgCardapio.TabIndex = 17;
             // 
             // colID
