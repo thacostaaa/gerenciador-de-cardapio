@@ -36,16 +36,10 @@ namespace codigocardapio
             return conexaoBD;
         }
 
-        private void btInserir_Click(object sender, EventArgs e)
-        {
-            atualizarGrid();
-        }
-
         private void atualizarGrid()
         {
             MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
             MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
-
             try
             {
                 realizaConexacoBD.Open();
@@ -80,14 +74,51 @@ namespace codigocardapio
 
         private void btLimpar_Click(object sender, EventArgs e)
         {
-            tbItem.Clear();
+            limparCampos();
+        }
+        private void limparCampos()
+        {
+            tbNome.Clear();
             tbDescricao.Clear();
             tbValor.Clear();
-            tbValorDesconto.Clear();
+            tbValorComDesconto.Clear();
             tbCategoria.Clear();
-            tbRestricoes.Clear();
+            tbRestricao.Clear();
         }
 
-        
+        private void btInserir_Click(object sender, EventArgs e)
+        {
+            if (tbNome.Text == "" || tbValor.Text == "" || tbCategoria.Text == "")
+            {
+                MessageBox.Show("Os campos nome, valor e categoria são obrigatórios");
+
+                return;
+            }
+
+            MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
+            MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
+            try
+            {
+                realizaConexacoBD.Open();
+
+                MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
+
+                comandoMySql.CommandText = "INSERT INTO itemcardapio (nomeItem,descricaoItem,valorItem,valorComDesconto,categoriaItem,restricaoItem) " +
+                    "VALUES('" + tbNome.Text + "', '" + tbDescricao.Text + "', '" + tbValor.Text + "', '" + tbValorComDesconto.Text + "', '" + tbCategoria.Text + "', '" + tbRestricao.Text + "')";
+                comandoMySql.ExecuteNonQuery();
+                realizaConexacoBD.Close();
+
+                MessageBox.Show("Inserido com sucesso");
+
+                atualizarGrid();
+                limparCampos();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
     }
 }

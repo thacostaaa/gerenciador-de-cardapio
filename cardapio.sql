@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 03/09/2021 às 23:27
+-- Tempo de geração: 04/09/2021 às 20:35
 -- Versão do servidor: 10.4.19-MariaDB
 -- Versão do PHP: 8.0.7
 
@@ -46,11 +46,19 @@ CREATE TABLE `itemcardapio` (
   `nomeItem` varchar(50) NOT NULL,
   `descricaoItem` text CHARACTER SET utf8 NOT NULL,
   `valorItem` varchar(50) NOT NULL,
-  `valorDesconto` varchar(50) NOT NULL,
+  `valorComDesconto` varchar(50) NOT NULL,
   `categoriaItem` varchar(150) CHARACTER SET utf8 NOT NULL,
   `restricaoItem` varchar(50) CHARACTER SET utf8 NOT NULL,
   `ativoItem` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Despejando dados para a tabela `itemcardapio`
+--
+
+INSERT INTO `itemcardapio` (`idItem`, `nomeItem`, `descricaoItem`, `valorItem`, `valorComDesconto`, `categoriaItem`, `restricaoItem`, `ativoItem`) VALUES
+(2, 'Teste', 'Testando.', '123,00', '100,00', 'Bebida', 'alsdjkf', 1),
+(3, 'Coca Cola', 'Coca Cola geladinha', '5,00', '4,00', 'Bebidas', '', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -76,7 +84,7 @@ ALTER TABLE `itemcardapio`
 -- AUTO_INCREMENT de tabela `itemcardapio`
 --
 ALTER TABLE `itemcardapio`
-  MODIFY `idItem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idItem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
