@@ -52,15 +52,17 @@ namespace codigocardapio
 
                 while (reader.Read())
                 {
-                    DataGridViewRow row = (DataGridViewRow)dgCardapio.Rows[0].Clone();//FAZ UM CAST E CLONA A LINHA DA TABELA
-                    row.Cells[0].Value = reader.GetInt32(0);//ID
-                    row.Cells[1].Value = reader.GetString(1);//NOME
-                    row.Cells[2].Value = reader.GetString(2);//DESCRICAO
-                    row.Cells[3].Value = reader.GetString(3);//VALOR
-                    row.Cells[4].Value = reader.GetString(4);//VALOR DESCONTO
-                    row.Cells[5].Value = reader.GetString(5);//CATEGORIA
-                    row.Cells[6].Value = reader.GetString(6);//RESTRICAO
-                    dgCardapio.Rows.Add(row);//ADICIONO A LINHA NA TABELA
+                    DataGridViewRow row = (DataGridViewRow)dgCardapio.Rows[0].Clone(); //FAZ UM CAST E CLONA A LINHA DA TABELA
+                    
+                    row.Cells[0].Value = reader.GetInt32(0); //ID
+                    row.Cells[1].Value = reader.GetString(1); //NOME
+                    row.Cells[2].Value = reader.GetString(2); //DESCRICAO
+                    row.Cells[3].Value = reader.GetString(3); //VALOR
+                    row.Cells[4].Value = reader.GetString(4); //VALOR DESCONTO
+                    row.Cells[5].Value = reader.GetString(5); //CATEGORIA
+                    row.Cells[6].Value = reader.GetString(6); //RESTRICAO
+                    
+                    dgCardapio.Rows.Add(row); //ADICIONO A LINHA NA TABELA
                 }
 
                 realizaConexacoBD.Close();
