@@ -39,12 +39,12 @@ namespace codigocardapio
         private void atualizarGrid()
         {
             MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
-            MySqlConnection realizaConexacoBD = new MySqlConnection(conexaoBD.ToString());
+            MySqlConnection realizaConexaoBD = new MySqlConnection(conexaoBD.ToString());
             try
             {
-                realizaConexacoBD.Open();
+                realizaConexaoBD.Open();
 
-                MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
+                MySqlCommand comandoMySql = realizaConexaoBD.CreateCommand();
                 comandoMySql.CommandText = "SELECT * FROM itemcardapio WHERE ativoItem = 1";
                 MySqlDataReader reader = comandoMySql.ExecuteReader();
 
@@ -65,7 +65,7 @@ namespace codigocardapio
                     dgCardapio.Rows.Add(row); //ADICIONO A LINHA NA TABELA
                 }
 
-                realizaConexacoBD.Close();
+                realizaConexaoBD.Close();
             }
             catch (Exception ex)
             {
@@ -86,6 +86,7 @@ namespace codigocardapio
             tbValorComDesconto.Clear();
             tbCategoria.Clear();
             tbRestricao.Clear();
+            tbID.Clear();
         }
 
         private void btInserir_Click(object sender, EventArgs e)
@@ -121,6 +122,80 @@ namespace codigocardapio
                 Console.WriteLine(ex.Message);
             }
 
+        }
+
+        private void btAlterar_Click(object sender, EventArgs e)
+        {
+
+            MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
+            MySqlConnection realizaConexaoBD = new MySqlConnection(conexaoBD.ToString());
+            try
+            {
+                realizaConexaoBD.Open(); //Abre a conexão com o banco
+
+                MySqlCommand comandoMySql = realizaConexaoBD.CreateCommand(); //Crio um comando SQL
+                comandoMySql.CommandText = "UPDATE itemcardapio SET nomeItem = '" + tbNome.Text + "', " +
+                    "descricaoItem = '" + tbDescricao.Text + "', " +
+                    "valorItem = '" + tbValor.Text + "', " +
+                    "valorComDesconto = '" + tbValorComDesconto.Text + "', " +
+                    "categoriaItem = '" + tbCategoria.Text + "', " +
+                    "restricaoItem = '" + tbRestricao.Text + "' " +
+                    "WHERE idItem = " + tbID.Text;
+                comandoMySql.ExecuteNonQuery();
+
+                realizaConexaoBD.Close(); // Fecho a conexão com o banco
+                MessageBox.Show("Atualizado com sucesso"); //Exibo mensagem de aviso
+                atualizarGrid();
+                limparCampos();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Não foi possivel abrir a conexão! ");
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void btDeletar_Click(object sender, EventArgs e)
+        {
+            MySqlConnectionStringBuilder conexaoBD = conexaoBanco();
+            MySqlConnection realizaConexaoBD = new MySqlConnection(conexaoBD.ToString());
+            try
+            {
+                realizaConexaoBD.Open(); //Abre a conexão com o banco
+
+                MySqlCommand comandoMySql = realizaConexaoBD.CreateCommand(); //Crio um comando SQL
+                //"DELETE FROM cardapio WHERE itemcardapio.`idItem` = "
+                //comandoMySql.CommandText = "DELETE FROM cardapio WHERE idItem = " + tbID.Text + "";
+                comandoMySql.CommandText =  "UPDATE itemcardapio SET ativoItem = 0 WHERE idItem = " + tbID.Text + "";
+                
+                
+                comandoMySql.ExecuteNonQuery();
+
+                realizaConexaoBD.Close(); // Fecho a conexão com o banco
+                MessageBox.Show("Deletado com sucesso"); //Exibo mensagem de aviso
+                atualizarGrid();
+                limparCampos();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Não foi possivel abrir a conexão! ");
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void dgCardapio_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgCardapio.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                dgCardapio.CurrentRow.Selected = true;
+                tbID.Text = dgCardapio.Rows[e.RowIndex].Cells["colID"].FormattedValue.ToString();
+                tbNome.Text = dgCardapio.Rows[e.RowIndex].Cells["colNome"].FormattedValue.ToString();
+                tbDescricao.Text = dgCardapio.Rows[e.RowIndex].Cells["colDescricao"].FormattedValue.ToString();
+                tbValor.Text = dgCardapio.Rows[e.RowIndex].Cells["colValor"].FormattedValue.ToString();
+                tbValorComDesconto.Text = dgCardapio.Rows[e.RowIndex].Cells["colValorcomDesconto"].FormattedValue.ToString();
+                tbCategoria.Text = dgCardapio.Rows[e.RowIndex].Cells["colCategoria"].FormattedValue.ToString();
+                tbRestricao.Text = dgCardapio.Rows[e.RowIndex].Cells["colRestricoes"].FormattedValue.ToString();
+            }
         }
     }
 }

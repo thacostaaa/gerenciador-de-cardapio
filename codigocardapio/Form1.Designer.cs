@@ -45,12 +45,16 @@ namespace codigocardapio
             this.btLimpar = new System.Windows.Forms.Button();
             this.dgCardapio = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.collNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValorComDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRestricoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btDeletar = new System.Windows.Forms.Button();
+            this.btAlterar = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgCardapio)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,7 +156,7 @@ namespace codigocardapio
             // 
             // btInserir
             // 
-            this.btInserir.Location = new System.Drawing.Point(494, 19);
+            this.btInserir.Location = new System.Drawing.Point(497, 22);
             this.btInserir.Name = "btInserir";
             this.btInserir.Size = new System.Drawing.Size(75, 23);
             this.btInserir.TabIndex = 12;
@@ -162,7 +166,7 @@ namespace codigocardapio
             // 
             // btLimpar
             // 
-            this.btLimpar.Location = new System.Drawing.Point(494, 56);
+            this.btLimpar.Location = new System.Drawing.Point(497, 61);
             this.btLimpar.Name = "btLimpar";
             this.btLimpar.Size = new System.Drawing.Size(75, 23);
             this.btLimpar.TabIndex = 14;
@@ -175,16 +179,17 @@ namespace codigocardapio
             this.dgCardapio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCardapio.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
-            this.collNome,
+            this.colNome,
             this.colDescricao,
             this.colValor,
             this.colValorComDesconto,
             this.colCategoria,
             this.colRestricoes});
-            this.dgCardapio.Location = new System.Drawing.Point(8, 150);
+            this.dgCardapio.Location = new System.Drawing.Point(12, 145);
             this.dgCardapio.Name = "dgCardapio";
             this.dgCardapio.Size = new System.Drawing.Size(784, 293);
             this.dgCardapio.TabIndex = 17;
+            this.dgCardapio.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCardapio_CellContentClick);
             // 
             // colID
             // 
@@ -193,10 +198,10 @@ namespace codigocardapio
             this.colID.ReadOnly = true;
             this.colID.Width = 30;
             // 
-            // collNome
+            // colNome
             // 
-            this.collNome.HeaderText = "Nome";
-            this.collNome.Name = "collNome";
+            this.colNome.HeaderText = "Nome";
+            this.colNome.Name = "colNome";
             // 
             // colDescricao
             // 
@@ -226,11 +231,52 @@ namespace codigocardapio
             this.colRestricoes.HeaderText = "Restrições";
             this.colRestricoes.Name = "colRestricoes";
             // 
+            // btDeletar
+            // 
+            this.btDeletar.Location = new System.Drawing.Point(602, 61);
+            this.btDeletar.Name = "btDeletar";
+            this.btDeletar.Size = new System.Drawing.Size(75, 23);
+            this.btDeletar.TabIndex = 19;
+            this.btDeletar.Text = "Remover";
+            this.btDeletar.UseVisualStyleBackColor = true;
+            this.btDeletar.Click += new System.EventHandler(this.btDeletar_Click);
+            // 
+            // btAlterar
+            // 
+            this.btAlterar.Location = new System.Drawing.Point(602, 22);
+            this.btAlterar.Name = "btAlterar";
+            this.btAlterar.Size = new System.Drawing.Size(75, 23);
+            this.btAlterar.TabIndex = 18;
+            this.btAlterar.Text = "Alterar";
+            this.btAlterar.UseVisualStyleBackColor = true;
+            this.btAlterar.Click += new System.EventHandler(this.btAlterar_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(151, 124);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(18, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "ID";
+            // 
+            // tbID
+            // 
+            this.tbID.Enabled = false;
+            this.tbID.Location = new System.Drawing.Point(179, 121);
+            this.tbID.Name = "tbID";
+            this.tbID.Size = new System.Drawing.Size(100, 20);
+            this.tbID.TabIndex = 21;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tbID);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.btDeletar);
+            this.Controls.Add(this.btAlterar);
             this.Controls.Add(this.dgCardapio);
             this.Controls.Add(this.btLimpar);
             this.Controls.Add(this.btInserir);
@@ -273,13 +319,17 @@ namespace codigocardapio
         private System.Windows.Forms.Button btInserir;
         private System.Windows.Forms.Button btLimpar;
         private System.Windows.Forms.DataGridView dgCardapio;
+        private System.Windows.Forms.Button btDeletar;
+        private System.Windows.Forms.Button btAlterar;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn collNome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescricao;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValor;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValorComDesconto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRestricoes;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tbID;
     }
 }
 
