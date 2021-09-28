@@ -44,6 +44,9 @@ namespace codigocardapio
             this.btInserir = new System.Windows.Forms.Button();
             this.btLimpar = new System.Windows.Forms.Button();
             this.dgCardapio = new System.Windows.Forms.DataGridView();
+            this.btDeletar = new System.Windows.Forms.Button();
+            this.btAlterar = new System.Windows.Forms.Button();
+            this.tbID = new System.Windows.Forms.TextBox();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,17 +54,13 @@ namespace codigocardapio
             this.colValorComDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRestricoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btDeletar = new System.Windows.Forms.Button();
-            this.btAlterar = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgCardapio)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 23);
+            this.label1.Location = new System.Drawing.Point(9, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
@@ -70,7 +69,7 @@ namespace codigocardapio
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 61);
+            this.label2.Location = new System.Drawing.Point(210, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 1;
@@ -79,7 +78,7 @@ namespace codigocardapio
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 92);
+            this.label3.Location = new System.Drawing.Point(9, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 2;
@@ -88,7 +87,7 @@ namespace codigocardapio
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(227, 23);
+            this.label4.Location = new System.Drawing.Point(210, 60);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 13);
             this.label4.TabIndex = 3;
@@ -97,7 +96,7 @@ namespace codigocardapio
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(227, 61);
+            this.label5.Location = new System.Drawing.Point(412, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 4;
@@ -106,7 +105,7 @@ namespace codigocardapio
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(227, 92);
+            this.label6.Location = new System.Drawing.Point(614, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 13);
             this.label6.TabIndex = 5;
@@ -114,62 +113,64 @@ namespace codigocardapio
             // 
             // tbNome
             // 
-            this.tbNome.Location = new System.Drawing.Point(69, 20);
+            this.tbNome.Location = new System.Drawing.Point(11, 27);
             this.tbNome.Name = "tbNome";
-            this.tbNome.Size = new System.Drawing.Size(100, 20);
-            this.tbNome.TabIndex = 6;
+            this.tbNome.Size = new System.Drawing.Size(171, 20);
+            this.tbNome.TabIndex = 0;
             // 
             // tbDescricao
             // 
-            this.tbDescricao.Location = new System.Drawing.Point(69, 57);
+            this.tbDescricao.Location = new System.Drawing.Point(213, 27);
             this.tbDescricao.Name = "tbDescricao";
-            this.tbDescricao.Size = new System.Drawing.Size(100, 20);
-            this.tbDescricao.TabIndex = 7;
+            this.tbDescricao.Size = new System.Drawing.Size(574, 20);
+            this.tbDescricao.TabIndex = 1;
             // 
             // tbValor
             // 
-            this.tbValor.Location = new System.Drawing.Point(69, 89);
+            this.tbValor.Location = new System.Drawing.Point(11, 76);
             this.tbValor.Name = "tbValor";
-            this.tbValor.Size = new System.Drawing.Size(100, 20);
-            this.tbValor.TabIndex = 8;
+            this.tbValor.Size = new System.Drawing.Size(171, 20);
+            this.tbValor.TabIndex = 2;
             // 
             // tbValorComDesconto
             // 
-            this.tbValorComDesconto.Location = new System.Drawing.Point(335, 20);
+            this.tbValorComDesconto.Location = new System.Drawing.Point(213, 76);
             this.tbValorComDesconto.Name = "tbValorComDesconto";
-            this.tbValorComDesconto.Size = new System.Drawing.Size(100, 20);
-            this.tbValorComDesconto.TabIndex = 9;
+            this.tbValorComDesconto.Size = new System.Drawing.Size(171, 20);
+            this.tbValorComDesconto.TabIndex = 3;
             // 
             // tbCategoria
             // 
-            this.tbCategoria.Location = new System.Drawing.Point(335, 57);
+            this.tbCategoria.Location = new System.Drawing.Point(415, 76);
             this.tbCategoria.Name = "tbCategoria";
-            this.tbCategoria.Size = new System.Drawing.Size(100, 20);
-            this.tbCategoria.TabIndex = 10;
+            this.tbCategoria.Size = new System.Drawing.Size(171, 20);
+            this.tbCategoria.TabIndex = 4;
             // 
             // tbRestricao
             // 
-            this.tbRestricao.Location = new System.Drawing.Point(335, 89);
+            this.tbRestricao.Location = new System.Drawing.Point(617, 76);
             this.tbRestricao.Name = "tbRestricao";
-            this.tbRestricao.Size = new System.Drawing.Size(100, 20);
-            this.tbRestricao.TabIndex = 11;
+            this.tbRestricao.Size = new System.Drawing.Size(171, 20);
+            this.tbRestricao.TabIndex = 5;
             // 
             // btInserir
             // 
-            this.btInserir.Location = new System.Drawing.Point(497, 22);
+            this.btInserir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btInserir.Location = new System.Drawing.Point(713, 115);
             this.btInserir.Name = "btInserir";
             this.btInserir.Size = new System.Drawing.Size(75, 23);
-            this.btInserir.TabIndex = 12;
+            this.btInserir.TabIndex = 6;
             this.btInserir.Text = "Inserir";
             this.btInserir.UseVisualStyleBackColor = true;
             this.btInserir.Click += new System.EventHandler(this.btInserir_Click);
             // 
             // btLimpar
             // 
-            this.btLimpar.Location = new System.Drawing.Point(497, 61);
+            this.btLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btLimpar.Location = new System.Drawing.Point(632, 115);
             this.btLimpar.Name = "btLimpar";
             this.btLimpar.Size = new System.Drawing.Size(75, 23);
-            this.btLimpar.TabIndex = 14;
+            this.btLimpar.TabIndex = 9;
             this.btLimpar.Text = "Limpar";
             this.btLimpar.UseVisualStyleBackColor = true;
             this.btLimpar.Click += new System.EventHandler(this.btLimpar_Click);
@@ -185,11 +186,46 @@ namespace codigocardapio
             this.colValorComDesconto,
             this.colCategoria,
             this.colRestricoes});
-            this.dgCardapio.Location = new System.Drawing.Point(12, 145);
+            this.dgCardapio.Location = new System.Drawing.Point(11, 155);
             this.dgCardapio.Name = "dgCardapio";
-            this.dgCardapio.Size = new System.Drawing.Size(784, 293);
+            this.dgCardapio.Size = new System.Drawing.Size(776, 293);
             this.dgCardapio.TabIndex = 17;
             this.dgCardapio.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCardapio_CellContentClick);
+            // 
+            // btDeletar
+            // 
+            this.btDeletar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btDeletar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btDeletar.Location = new System.Drawing.Point(470, 115);
+            this.btDeletar.Name = "btDeletar";
+            this.btDeletar.Size = new System.Drawing.Size(75, 23);
+            this.btDeletar.TabIndex = 8;
+            this.btDeletar.Text = "Remover";
+            this.btDeletar.UseVisualStyleBackColor = false;
+            this.btDeletar.Visible = false;
+            this.btDeletar.Click += new System.EventHandler(this.btDeletar_Click);
+            // 
+            // btAlterar
+            // 
+            this.btAlterar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btAlterar.Location = new System.Drawing.Point(551, 115);
+            this.btAlterar.Name = "btAlterar";
+            this.btAlterar.Size = new System.Drawing.Size(75, 23);
+            this.btAlterar.TabIndex = 7;
+            this.btAlterar.Text = "Alterar";
+            this.btAlterar.UseVisualStyleBackColor = true;
+            this.btAlterar.Visible = false;
+            this.btAlterar.Click += new System.EventHandler(this.btAlterar_Click);
+            // 
+            // tbID
+            // 
+            this.tbID.Enabled = false;
+            this.tbID.Location = new System.Drawing.Point(12, 117);
+            this.tbID.Name = "tbID";
+            this.tbID.ReadOnly = true;
+            this.tbID.Size = new System.Drawing.Size(100, 20);
+            this.tbID.TabIndex = 21;
+            this.tbID.Visible = false;
             // 
             // colID
             // 
@@ -207,7 +243,7 @@ namespace codigocardapio
             // 
             this.colDescricao.HeaderText = "Descrição";
             this.colDescricao.Name = "colDescricao";
-            this.colDescricao.Width = 300;
+            this.colDescricao.Width = 293;
             // 
             // colValor
             // 
@@ -231,50 +267,12 @@ namespace codigocardapio
             this.colRestricoes.HeaderText = "Restrições";
             this.colRestricoes.Name = "colRestricoes";
             // 
-            // btDeletar
-            // 
-            this.btDeletar.Location = new System.Drawing.Point(602, 61);
-            this.btDeletar.Name = "btDeletar";
-            this.btDeletar.Size = new System.Drawing.Size(75, 23);
-            this.btDeletar.TabIndex = 19;
-            this.btDeletar.Text = "Remover";
-            this.btDeletar.UseVisualStyleBackColor = true;
-            this.btDeletar.Click += new System.EventHandler(this.btDeletar_Click);
-            // 
-            // btAlterar
-            // 
-            this.btAlterar.Location = new System.Drawing.Point(602, 22);
-            this.btAlterar.Name = "btAlterar";
-            this.btAlterar.Size = new System.Drawing.Size(75, 23);
-            this.btAlterar.TabIndex = 18;
-            this.btAlterar.Text = "Alterar";
-            this.btAlterar.UseVisualStyleBackColor = true;
-            this.btAlterar.Click += new System.EventHandler(this.btAlterar_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(151, 124);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(18, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "ID";
-            // 
-            // tbID
-            // 
-            this.tbID.Enabled = false;
-            this.tbID.Location = new System.Drawing.Point(179, 121);
-            this.tbID.Name = "tbID";
-            this.tbID.Size = new System.Drawing.Size(100, 20);
-            this.tbID.TabIndex = 21;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 460);
             this.Controls.Add(this.tbID);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.btDeletar);
             this.Controls.Add(this.btAlterar);
             this.Controls.Add(this.dgCardapio);
@@ -321,6 +319,7 @@ namespace codigocardapio
         private System.Windows.Forms.DataGridView dgCardapio;
         private System.Windows.Forms.Button btDeletar;
         private System.Windows.Forms.Button btAlterar;
+        private System.Windows.Forms.TextBox tbID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNome;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescricao;
@@ -328,8 +327,6 @@ namespace codigocardapio
         private System.Windows.Forms.DataGridViewTextBoxColumn colValorComDesconto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRestricoes;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbID;
     }
 }
 

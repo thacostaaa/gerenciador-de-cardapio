@@ -87,6 +87,13 @@ namespace codigocardapio
             tbCategoria.Clear();
             tbRestricao.Clear();
             tbID.Clear();
+
+            btInserir.Enabled = true;
+            btAlterar.Visible = false;
+            btDeletar.Visible = false;
+
+            // Foca no campo nome depois dos campo serem limpos
+            tbNome.Focus();
         }
 
         private void btInserir_Click(object sender, EventArgs e)
@@ -187,6 +194,10 @@ namespace codigocardapio
         {
             if (dgCardapio.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
+                btInserir.Enabled = false;
+                btAlterar.Visible = true;
+                btDeletar.Visible = true;
+
                 dgCardapio.CurrentRow.Selected = true;
                 tbID.Text = dgCardapio.Rows[e.RowIndex].Cells["colID"].FormattedValue.ToString();
                 tbNome.Text = dgCardapio.Rows[e.RowIndex].Cells["colNome"].FormattedValue.ToString();
@@ -195,6 +206,9 @@ namespace codigocardapio
                 tbValorComDesconto.Text = dgCardapio.Rows[e.RowIndex].Cells["colValorcomDesconto"].FormattedValue.ToString();
                 tbCategoria.Text = dgCardapio.Rows[e.RowIndex].Cells["colCategoria"].FormattedValue.ToString();
                 tbRestricao.Text = dgCardapio.Rows[e.RowIndex].Cells["colRestricoes"].FormattedValue.ToString();
+
+                // Após preencher os campos, seleciona o texto do campo nome
+                tbNome.Select();
             }
         }
     }
