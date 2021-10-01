@@ -50,6 +50,8 @@ namespace codigocardapio
 
                 dgCardapio.Rows.Clear();
 
+                dgCardapio.AllowUserToAddRows = true;
+
                 while (reader.Read())
                 {
                     DataGridViewRow row = (DataGridViewRow)dgCardapio.Rows[0].Clone(); //FAZ UM CAST E CLONA A LINHA DA TABELA
@@ -60,10 +62,16 @@ namespace codigocardapio
                     row.Cells[3].Value = reader.GetString(3); //VALOR
                     row.Cells[4].Value = reader.GetString(4); //VALOR DESCONTO
                     row.Cells[5].Value = reader.GetString(5); //CATEGORIA
-                    row.Cells[6].Value = reader.GetString(6); //RESTRICAO
-                    
+                    row.Cells[6].Value = reader.GetBoolean(7); //SEM AÇÚCAR
+                    row.Cells[7].Value = reader.GetBoolean(8); //SEM GLÚTEN
+                    row.Cells[8].Value = reader.GetBoolean(9); //SEM LACTOSE
+                    row.Cells[9].Value = reader.GetBoolean(10); //VEGETARIANO
+                    row.Cells[10].Value = reader.GetBoolean(11); //VEGANO
+
                     dgCardapio.Rows.Add(row); //ADICIONO A LINHA NA TABELA
                 }
+
+                dgCardapio.AllowUserToAddRows = false;
 
                 realizaConexaoBD.Close();
             }
@@ -84,8 +92,12 @@ namespace codigocardapio
             tbDescricao.Clear();
             tbValor.Clear();
             tbValorComDesconto.Clear();
-            tbCategoria.Clear();
-            tbRestricao.Clear();
+            cbCategoria.SelectedIndex = -1;
+            cbSemAcucar.Checked = false;
+            cbSemGluten.Checked = false;
+            cbSemLactose.Checked = false;
+            cbVegetariano.Checked = false;
+            cbVegano.Checked = false;
             tbID.Clear();
 
             btInserir.Enabled = true;
@@ -98,7 +110,7 @@ namespace codigocardapio
 
         private void btInserir_Click(object sender, EventArgs e)
         {
-            if (tbNome.Text == "" || tbValor.Text == "" || tbCategoria.Text == "")
+            if (tbNome.Text == "" || tbValor.Text == "" || cbCategoria.Text == "")
             {
                 MessageBox.Show("Os campos nome, valor e categoria são obrigatórios");
 
@@ -112,9 +124,19 @@ namespace codigocardapio
                 realizaConexacoBD.Open();
 
                 MySqlCommand comandoMySql = realizaConexacoBD.CreateCommand();
-
-                comandoMySql.CommandText = "INSERT INTO itemcardapio (nomeItem,descricaoItem,valorItem,valorComDesconto,categoriaItem,restricaoItem) " +
-                    "VALUES('" + tbNome.Text + "', '" + tbDescricao.Text + "', '" + tbValor.Text + "', '" + tbValorComDesconto.Text + "', '" + tbCategoria.Text + "', '" + tbRestricao.Text + "')";
+                Console.WriteLine(cbSemAcucar.Checked);
+                comandoMySql.CommandText = "INSERT INTO itemcardapio (nomeItem,descricaoItem,valorItem,valorComDesconto,categoriaItem,semAcucar,semGluten,semLactose,vegetariano,vegano) " +
+                    "VALUES('" +
+                    tbNome.Text + "', '" +
+                    tbDescricao.Text + "', '" +
+                    tbValor.Text + "', '" +
+                    tbValorComDesconto.Text + "', '" +
+                    cbCategoria.Text + "', '" +
+                    Convert.ToInt16(cbSemAcucar.Checked) + "', '" +
+                    Convert.ToInt16(cbSemGluten.Checked) + "', '" +
+                    Convert.ToInt16(cbSemLactose.Checked) + "', '" +
+                    Convert.ToInt16(cbVegetariano.Checked) + "', '" +
+                    Convert.ToInt16(cbVegano.Checked) + "')";
                 comandoMySql.ExecuteNonQuery();
                 realizaConexacoBD.Close();
 
@@ -145,8 +167,12 @@ namespace codigocardapio
                     "descricaoItem = '" + tbDescricao.Text + "', " +
                     "valorItem = '" + tbValor.Text + "', " +
                     "valorComDesconto = '" + tbValorComDesconto.Text + "', " +
-                    "categoriaItem = '" + tbCategoria.Text + "', " +
-                    "restricaoItem = '" + tbRestricao.Text + "' " +
+                    "categoriaItem = '" + cbCategoria.Text + "', " +
+                    "semAcucar = " + Convert.ToInt16(cbSemAcucar.Checked) + ", " +
+                    "semGluten = " + Convert.ToInt16(cbSemGluten.Checked) + ", " +
+                    "semLactose = " + Convert.ToInt16(cbSemLactose.Checked) + ", " +
+                    "vegetariano = " + Convert.ToInt16(cbVegetariano.Checked) + ", " +
+                    "vegano = " + Convert.ToInt16(cbVegano.Checked) + " " +
                     "WHERE idItem = " + tbID.Text;
                 comandoMySql.ExecuteNonQuery();
 
@@ -192,7 +218,7 @@ namespace codigocardapio
 
         private void dgCardapio_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgCardapio.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            if (e.RowIndex >=0)
             {
                 btInserir.Enabled = false;
                 btAlterar.Visible = true;
@@ -204,8 +230,12 @@ namespace codigocardapio
                 tbDescricao.Text = dgCardapio.Rows[e.RowIndex].Cells["colDescricao"].FormattedValue.ToString();
                 tbValor.Text = dgCardapio.Rows[e.RowIndex].Cells["colValor"].FormattedValue.ToString();
                 tbValorComDesconto.Text = dgCardapio.Rows[e.RowIndex].Cells["colValorcomDesconto"].FormattedValue.ToString();
-                tbCategoria.Text = dgCardapio.Rows[e.RowIndex].Cells["colCategoria"].FormattedValue.ToString();
-                tbRestricao.Text = dgCardapio.Rows[e.RowIndex].Cells["colRestricoes"].FormattedValue.ToString();
+                cbCategoria.Text = dgCardapio.Rows[e.RowIndex].Cells["colCategoria"].FormattedValue.ToString();
+                cbSemAcucar.Checked = (bool)dgCardapio.Rows[e.RowIndex].Cells["colSemAcucar"].Value;
+                cbSemGluten.Checked = (bool)dgCardapio.Rows[e.RowIndex].Cells["colSemGluten"].Value;
+                cbSemLactose.Checked = (bool)dgCardapio.Rows[e.RowIndex].Cells["colSemLactose"].Value;
+                cbVegetariano.Checked = (bool)dgCardapio.Rows[e.RowIndex].Cells["colVegetariano"].Value;
+                cbVegano.Checked = (bool)dgCardapio.Rows[e.RowIndex].Cells["colVegano"].Value;
 
                 // Após preencher os campos, seleciona o texto do campo nome
                 tbNome.Select();
