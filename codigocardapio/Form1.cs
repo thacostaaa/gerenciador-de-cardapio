@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -54,21 +47,21 @@ namespace codigocardapio
 
                 while (reader.Read())
                 {
-                    DataGridViewRow row = (DataGridViewRow)dgCardapio.Rows[0].Clone(); //FAZ UM CAST E CLONA A LINHA DA TABELA
+                    DataGridViewRow row = (DataGridViewRow)dgCardapio.Rows[0].Clone(); // Faz um cast e clona a linha da tabela
                     
-                    row.Cells[0].Value = reader.GetInt32(0); //ID
-                    row.Cells[1].Value = reader.GetString(1); //NOME
-                    row.Cells[2].Value = reader.GetString(2); //DESCRICAO
-                    row.Cells[3].Value = reader.GetString(3); //VALOR
-                    row.Cells[4].Value = reader.GetString(4); //VALOR DESCONTO
-                    row.Cells[5].Value = reader.GetString(5); //CATEGORIA
-                    row.Cells[6].Value = reader.GetBoolean(7); //SEM AÇÚCAR
-                    row.Cells[7].Value = reader.GetBoolean(8); //SEM GLÚTEN
-                    row.Cells[8].Value = reader.GetBoolean(9); //SEM LACTOSE
-                    row.Cells[9].Value = reader.GetBoolean(10); //VEGETARIANO
-                    row.Cells[10].Value = reader.GetBoolean(11); //VEGANO
+                    row.Cells[0].Value = reader.GetInt32(0); // ID
+                    row.Cells[1].Value = reader.GetString(1); // Nome
+                    row.Cells[2].Value = reader.GetString(2); // Descrição
+                    row.Cells[3].Value = reader.GetString(3); // Valor
+                    row.Cells[4].Value = reader.GetString(4); // Valor com desconto
+                    row.Cells[5].Value = reader.GetString(5); // Categoria
+                    row.Cells[6].Value = reader.GetBoolean(7); // Sem açúcar
+                    row.Cells[7].Value = reader.GetBoolean(8); // Sem glúten
+                    row.Cells[8].Value = reader.GetBoolean(9); // Sem lactose
+                    row.Cells[9].Value = reader.GetBoolean(10); // Vegetariano
+                    row.Cells[10].Value = reader.GetBoolean(11); // Vegano
 
-                    dgCardapio.Rows.Add(row); //ADICIONO A LINHA NA TABELA
+                    dgCardapio.Rows.Add(row); // Adiciona a linha na tabela
                 }
 
                 dgCardapio.AllowUserToAddRows = false;
@@ -137,6 +130,7 @@ namespace codigocardapio
                     Convert.ToInt16(cbSemLactose.Checked) + "', '" +
                     Convert.ToInt16(cbVegetariano.Checked) + "', '" +
                     Convert.ToInt16(cbVegano.Checked) + "')";
+                
                 comandoMySql.ExecuteNonQuery();
                 realizaConexacoBD.Close();
 
@@ -150,7 +144,6 @@ namespace codigocardapio
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
 
         private void btAlterar_Click(object sender, EventArgs e)
@@ -163,6 +156,7 @@ namespace codigocardapio
                 realizaConexaoBD.Open(); //Abre a conexão com o banco
 
                 MySqlCommand comandoMySql = realizaConexaoBD.CreateCommand(); //Crio um comando SQL
+                
                 comandoMySql.CommandText = "UPDATE itemcardapio SET nomeItem = '" + tbNome.Text + "', " +
                     "descricaoItem = '" + tbDescricao.Text + "', " +
                     "valorItem = '" + tbValor.Text + "', " +
@@ -174,16 +168,17 @@ namespace codigocardapio
                     "vegetariano = " + Convert.ToInt16(cbVegetariano.Checked) + ", " +
                     "vegano = " + Convert.ToInt16(cbVegano.Checked) + " " +
                     "WHERE idItem = " + tbID.Text;
+                
                 comandoMySql.ExecuteNonQuery();
-
-                realizaConexaoBD.Close(); // Fecho a conexão com o banco
-                MessageBox.Show("Atualizado com sucesso"); //Exibo mensagem de aviso
+                realizaConexaoBD.Close(); // Fecha a conexão com o banco
+                
+                MessageBox.Show("Atualizado com sucesso"); // Exibe mensagem de aviso
                 atualizarGrid();
                 limparCampos();
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Não foi possivel abrir a conexão! ");
+                // MessageBox.Show("Não foi possivel abrir a conexão! ");
                 Console.WriteLine(ex.Message);
             }
         }
@@ -194,24 +189,22 @@ namespace codigocardapio
             MySqlConnection realizaConexaoBD = new MySqlConnection(conexaoBD.ToString());
             try
             {
-                realizaConexaoBD.Open(); //Abre a conexão com o banco
+                realizaConexaoBD.Open(); // Abre a conexão com o banco
 
-                MySqlCommand comandoMySql = realizaConexaoBD.CreateCommand(); //Crio um comando SQL
-                //"DELETE FROM cardapio WHERE itemcardapio.`idItem` = "
-                //comandoMySql.CommandText = "DELETE FROM cardapio WHERE idItem = " + tbID.Text + "";
+                MySqlCommand comandoMySql = realizaConexaoBD.CreateCommand(); // Cria um comando SQL
+                
                 comandoMySql.CommandText =  "UPDATE itemcardapio SET ativoItem = 0 WHERE idItem = " + tbID.Text + "";
-                
-                
+
                 comandoMySql.ExecuteNonQuery();
 
-                realizaConexaoBD.Close(); // Fecho a conexão com o banco
-                MessageBox.Show("Deletado com sucesso"); //Exibo mensagem de aviso
+                realizaConexaoBD.Close(); // Fecha a conexão com o banco
+                MessageBox.Show("Deletado com sucesso"); // Exibe mensagem de aviso
                 atualizarGrid();
                 limparCampos();
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Não foi possivel abrir a conexão! ");
+                // MessageBox.Show("Não foi possivel abrir a conexão! ");
                 Console.WriteLine(ex.Message);
             }
         }
